@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Escolar</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>Gestión Escolar</h1>
+        <button id="menuToggle" class="menu-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </header>
+
+    <nav id="mainNav" class="main-nav">
+        <button id="btnInicio">Inicio</button>
+        <button id="btnRegistrarEstudiante">Estudiantes</button>
+        <button id="btnRegistrarRepresentante">Representantes</button>
+        <button id="btnPagos">Pagos</button>
+        <button id="btnNotas">Notas</button>
+        <button id="btnBuscar">Buscar</button>
+    </nav>
+
+    <main>
+        <section id="inicio" class="page active">
+            <h2>Bienvenido</h2>
+            <p>Selecciona una opción del menú para comenzar.</p>
+        </section>
+
+        <section id="registrarEstudiante" class="page">
+            <h2>Registrar Estudiante</h2>
+            <form id="formEstudiante">
+                <label for="nombreEstudiante">Nombre Completo:</label>
+                <input type="text" id="nombreEstudiante" required>
+
+                <label for="cedulaEstudiante">Cédula o ID Interno:</label>
+                <input type="text" id="cedulaEstudiante" placeholder="Ej: V-12345678 (o AL-001 si no tiene cédula)" required>
+
+                <label for="gradoEstudiante">Grado/Año:</label>
+                <input type="text" id="gradoEstudiante" required>
+
+                <label for="fechaNacimiento">Fecha Nacimiento:</label>
+                <input type="date" id="fechaNacimiento" required>
+
+                <label for="direccionEstudiante">Dirección:</label>
+                <textarea id="direccionEstudiante"></textarea>
+
+                <label for="cedulaRepresentanteEstudiante">Cédula del Representante (Ya registrado):</label>
+                <input type="text" id="cedulaRepresentanteEstudiante" required placeholder="Cédula del representante legal">
+
+                <button type="submit">Guardar Estudiante</button>
+            </form>
+            <h3>Estudiantes Registrados</h3>
+            <ul id="listaEstudiantes"></ul>
+        </section>
+
+        <section id="registrarRepresentante" class="page">
+            <h2>Registrar Representante</h2>
+            <form id="formRepresentante">
+                <label for="nombreRepresentante">Nombre Completo:</label>
+                <input type="text" id="nombreRepresentante" required>
+
+                <label for="cedulaRepresentante">Cédula:</label>
+                <input type="text" id="cedulaRepresentante" required>
+
+                <label for="telefonoRepresentante">Teléfono:</label>
+                <input type="tel" id="telefonoRepresentante" required>
+
+                <label for="parentescoRepresentante">Parentesco con Estudiante:</label>
+                <input type="text" id="parentescoRepresentante" placeholder="Ej: Padre, Madre, Tutor" required>
+                
+                <button type="submit">Guardar Representante</button>
+            </form>
+            <h3>Representantes Registrados</h3>
+            <ul id="listaRepresentantes"></ul>
+        </section>
+
+        <section id="pagos" class="page">
+            <h2>Gestión de Pagos</h2>
+            <form id="formPago">
+                <label for="cedulaEstudiantePago">Cédula o ID de Estudiante:</label>
+                <input type="text" id="cedulaEstudiantePago" required>
+
+                <label for="montoPago">Monto:</label>
+                <input type="number" id="montoPago" step="0.01" required>
+
+                <label for="conceptoPago">Concepto:</label>
+                <input type="text" id="conceptoPago" placeholder="Ej: Mensualidad, Matrícula" required>
+
+                <label for="fechaPago">Fecha:</label>
+                <input type="date" id="fechaPago" required>
+
+                <button type="submit">Registrar Pago</button>
+            </form>
+            <h3>Historial de Pagos</h3>
+            <ul id="listaPagos"></ul>
+        </section>
+
+        <section id="notas" class="page">
+            <h2>Ficha de Notas</h2>
+            <form id="formBuscarNotas">
+                <label for="cedulaEstudianteNotas">Cédula o ID de Estudiante:</label>
+                <input type="text" id="cedulaEstudianteNotas" required>
+                <button type="submit">Buscar Notas</button>
+            </form>
+            <div id="fichaNotasResultado">
+                </div>
+            <hr>
+            <h3>Registrar Notas (Sólo para prueba)</h3>
+            <form id="formRegistrarNotas">
+                <label for="cedulaEstudianteAddNota">Cédula o ID de Estudiante:</label>
+                <input type="text" id="cedulaEstudianteAddNota" required>
+                <label for="materiaNota">Materia:</label>
+                <input type="text" id="materiaNota" required>
+                <label for="valorNota">Nota:</label>
+                <input type="number" id="valorNota" min="0" max="20" required>
+                <button type="submit">Agregar Nota</button>
+            </form>
+        </section>
+
+        <section id="buscar" class="page">
+            <h2>Buscar Estudiantes o Representantes</h2>
+            <form id="formBuscador">
+                <label for="tipoBusqueda">Buscar por:</label>
+                <select id="tipoBusqueda">
+                    <option value="estudiante">Estudiante</option>
+                    <option value="representante">Representante</option>
+                </select>
+
+                <label for="criterioBusqueda">Criterio de Búsqueda (Nombre, Cédula o ID Interno/Generado):</label>
+                <input type="text" id="criterioBusqueda" placeholder="Ej: Juan Pérez, V-12345678, AL-001, o el ID largo generado">
+
+                <button type="submit">Buscar</button>
+            </form>
+
+            <h3>Resultados de la Búsqueda</h3>
+            <div id="resultadosBusqueda">
+                <p>Aquí se mostrarán los resultados.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="index.js"></script>
+</body>
+</html>
